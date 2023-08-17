@@ -1,0 +1,10 @@
+4a)Digitamos no ./ex1 4.0 no terminal, logo o if não foi executado. Nota-se
+que o ex1 não foi encontrado porque não está no path do computador.
+ 
+4b) Deu certo, foi transformar os dois arquivos em objeto, depois
+usar o ligador para juntar eles. Criando um arquivo executável.
+
+4c) A main funciona, porém o valor retornado pela main é 0
+
+5)A função dump mostra o endereço de memória e o que está armazenado nele
+ao lado
