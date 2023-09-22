@@ -1,0 +1,62 @@
+ 1a) Cada dois dígitos hexadecimais equivalem a 16*16= 256 possibilidades, que equivale a um byte que é o mesmo que 8 bits= 2*2*2*2*2*2*2*2 = 256 possibilidades por análise combinatória pois cada casa pode ser 0 ou 1. 10.000 na base 16 dá 2*16³ + 7*16²+ 1*16¹+ 0*16⁰. = 2710. Na memória ficará printado pela convenção little endian (byte menos significativo primeiro)
+10
+27
+00
+00
+Pois o primeiro byte é 10, depois 27 e os outros estão vazios, por isso 00 e  00
+
+1b)Apareceu na tela
+10
+27
+00
+00
+00
+00
+00
+00
+00
+O dump foi maior pois long ocupa 8 bytes
+1c) O short será armazenado em 2 bytes apenas
+
+1d) Se eu colocar char i = 97 vai aparecer na memória 61 que é 97 em hexadecimal,
+lembrando que char ocupa 1 byte, ou seja 8 bits e 256 informações. Se eu colocar char i = 'a' que é o número 97 na tabela ASC22, vai dar o 97 em hexadecimal analogamente.
+
+1e)Ao fazer o dump de "7509" obtemos na saída 37 35 30 39 00. A explicação é que o 37 na base 16 é 55 na base 10 que é o número na tabela ASCII para o caractere 7. Analogamente para o 35, 30 e 39. Já o 00 é o caractre NULL terminated string que é o caractere 0 na tabela ASCII, a string ocupa. Os caracteres 'A',' ','\n' e '$'.65, 32,10 e 36
+
+
+2a) O programa realiza a conversão de um número inteiro representado como uma string para um tipo inteiro. A função string2num é responsável por essa tarefa. Ela faz isso através de um loop que percorre a string, usando um ponteiro para apontar para cada caractere da sequência. Em cada iteração do loop, a função faz o seguinte:
+
+    Subtrai o valor ASCII de '0' do caractere atual da string. Isso é feito para garantir que o caractere seja convertido em seu valor numérico real. Por exemplo, '0' na tabela ASCII é 48, então subtrair '0' de um caractere '0' resulta em 0, '1' - '0' resulta em 1 e assim por diante.
+
+    Adiciona o valor numérico do caractere ao número acumulado em a. Multiplica o número acumulado por 10 antes de adicionar o dígito convertido. Isso é feito para posicionar o dígito corretamente na base 10. Por exemplo, se a sequência de caracteres for "1234", durante a primeira iteração, o '1' é convertido em 1 e adicionado a a, resultando em a igual a 1. Na próxima iteração, o '2' é convertido em 2 e adicionado a a, multiplicando a por 10 antes, resultando em a igual a 12. Esse processo continua até que todos os dígitos tenham sido convertidos e acumulados.
+
+No final do loop, a função string2num retorna o valor acumulado em a, que é o resultado da conversão da string em um número inteiro. Portanto, a função string2num é uma função de conversão de string para inteiro que realiza essas etapas iterativamente para cada caractere na string, garantindo que o valor numérico seja calculado corretamente.
+
+
+
+
+
+2b) A função string2num recebe dois parâmetros: a string s a ser convertida e a base base na qual a string está escrita.
+
+Dentro da função, uma variável result é inicializada com o valor zero para armazenar o resultado da conversão.
+
+A função entra em um loop que percorre a string s caracter por caracter usando um ponteiro. Em cada iteração do loop:
+
+    A função char2int é chamada para converter o caractere atual em seu valor numérico correspondente, levando em consideração a base especificada. Essa conversão é importante para lidar com diferentes dígitos em bases variadas.
+
+    Em seguida, a função verifica se o valor convertido é válido. Se o valor for igual a -1 ou maior ou igual à base especificada, isso indica um caractere fora da base, resultando em um erro e encerramento do programa.
+
+    Caso contrário, o valor convertido é acumulado em result. Isso é feito multiplicando o valor atual de result pela base e somando o valor convertido do caractere.
+
+O loop continua até que toda a string seja processada.
+
+Finalmente, o resultado da conversão é retornado como um valor inteiro.
+
+
+
+
+2c)A função string2num foi modificada para aceitar bases maiores que 10, permitindo a representação de dígitos de 10 a 35 usando letras 'a' a 'z' (ou 'A' a 'Z'). Isso foi alcançado com a introdução da função char2int que converte caracteres em valores numéricos de acordo com a base especificada.
+
+    char2int verifica se um caractere é um dígito numérico (0-9) e o converte subtraindo '0'. Se for uma letra 'a' a 'z' (ou 'A' a 'Z'), ele é convertido subtraindo 'a' ou 'A' e adicionando 10 para representar dígitos de 10 a 35.
+
+    string2num agora aceita a base como um segundo parâmetro. Ela percorre a string de entrada, convertendo cada caractere em seu valor numérico correspondente de acordo com a base especificada usando char2int. Se um caractere estiver fora da base especificada, a função retorna -1.
