@@ -1,0 +1,26 @@
+55                   	push   %rbp
+
+
+48 89 e5             	mov    %rsp,%rbp
+
+
+
+48 83 ec 10          	sub    $0x10,%rsp
+
+41 ff           %edi
+41 fe            %esi
+41 83 f8 %r8d
+41 83 f9  %r9d
+41 83 fa  %r10d
+41 83 fb 00          	cmp    $0x0,%r11d
+75 00                	jne    401116 <L2>
+
+
+
+
+8b 45 fc             	mov    -0x4(%rbp),%eax
+
+
+
+
+

@@ -1,0 +1,1 @@
+gcc -Wall -Wa,--execstack -o prog compilalinb.c main.c

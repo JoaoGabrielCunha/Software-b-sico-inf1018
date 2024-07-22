@@ -1,0 +1,76 @@
+TURMAS DIFERENTES!!!
+Gabriel Augusto Gedey Porto 2210508 3WB 
+João Gabriel da Cunha Vasconcellos Matricula 2211302 3WC 
+
+
+1) O que está funcionando? Qualquer código na linguagem basica que esteja sintáticamente correto funciona, incluindo 
+com mais espaços do que deveria entre as variáveis e com quebra de linhas no meio de cada comando na linguagem basica.
+ Não funciona casos extrapolados como colocar inteiros que não cabem em 32 bits
+por exemplo, mas isso não é pedido no enunciado.
+
+!!!Obs!!!) Fizemos a contagem de linha na seguinte forma linhas em branco não contam para a instrução if, por exemplo:
+
+var1 <= $4 + $4         //Linha1
+var1 <= $4 + $3         // Linha 2
+                        // Não entra na contagem para instruções de desvio.
+ret                     // Linha 3
+
+
+var1 <= $4 + $4         //Linha1
+var1 <= $4 + $3         // Linha 2                     
+ret                     //Linha 3
+
+ret estará na linha 3 em ambos os códigos na nossa implementação, se adicionarmos um condicional 3 ele irá para o ret de tendo espaço ou não.
+
+
+
+2) A nossa estratégia de implementação foi fazer uma tradução de cada variável vn para uma um -n(%rbp), p1 e p2 para edi e esi,
+$n para uma variável em C mesmo var1 ou var2 como no exemplo do enunciado e usamos um registrador auxiliar %r10d.
+Depois de abrir o espaço na pilha inicial padrão em assembly trifurcamos em casos de expressões de atribuição, desvio ou retorno. 
+Daí fomos abrindo em casos, traduzindo para o assembly e linguagem de máquina cada caso, e testando ele até cobrimors tudo. No final
+fechamos a pilha e destruimos o RA como padrão de finalização.
+
+Alguns exemplos de testes que usamos: 
+
+v1 <= $0 + $0          
+ret         
+(retornou 0)
+
+
+v1 <= p1 + $1
+ret
+
+(chamamos a função com p1 5 por exemplo e retornou 6)
+
+Depois que conseguimos fazer funcionar as expressões de desvio condional fizemos testes que incluam eles e funcionou também, 
+quebras de linha no meio como por exemplo:
+
+
+v1 <= $0 + 
+$0     
+
+            
+
+   v2    <=      $1                       + $0                        
+p1 <= p1 + $1        
+v3 <= p1 - v2     
+if v3 7     
+
+ret                  
+v3 <= v2 * v2
+
+v1 <= v1 + v3        
+v2 <= v2 + $1     
+
+if v2 4
+
+
+3) Nome dos integrantes: João Gabriel da Cunha Vasconecllos e Gabriel Gedey Porto.
+
+4) Linha de comando de compilação: gcc -Wall -Wa,--execstack -o prog compilalinb.c main.c
+   Saída gerada pelo computador: Nenhuma
+   depois de compilar damos ./prog e o programa é executado nos retornando o valor que está em v1 
+
+
+
+
